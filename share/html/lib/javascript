@@ -1,0 +1,4 @@
+<script src="[% uri_for('static/js', 'jquery-1.7.1.min.js') %]" type="text/javascript"></script>
+<script src="[% uri_for('static/js', 'enyo.js') %]" type="text/javascript"></script>
+<script src="[% uri_for('static/js', 'bootstrap.min.js') %]" type="text/javascript"></script>
+

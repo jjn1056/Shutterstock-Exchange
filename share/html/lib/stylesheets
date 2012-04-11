@@ -1,0 +1,9 @@
+<link rel="stylesheet"
+  href="[% uri_for('static/css', 'bootstrap.min.css'); %]"
+  type="text/css" rel="Stylesheet">
+<link rel="stylesheet"
+  href="[% uri_for('static/css', 'enyo.css') %]"
+  type="text/css" rel="Stylesheet">
+<link rel="stylesheet"
+  href="[% uri_for('static/css', 'local.css') %]"
+  type="text/css" rel="Stylesheet">

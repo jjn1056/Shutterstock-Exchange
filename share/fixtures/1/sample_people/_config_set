@@ -1,0 +1,23 @@
+$VAR1 = {
+          'sets' => [
+                      {
+                        'cond' => {
+                                    'handle' => [
+                                                  'John',
+                                                  'Logan'
+                                                ]
+                                  },
+                        'quantity' => '2',
+                        'class' => 'Person'
+                      }
+                    ],
+          'might_have' => {
+                            'fetch' => 0
+                          },
+          'belongs_to' => {
+                            'fetch' => 0
+                          },
+          'has_many' => {
+                          'fetch' => 0
+                        }
+        };

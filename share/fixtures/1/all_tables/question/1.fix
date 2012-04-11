@@ -1,0 +1,7 @@
+$HASH1 = {
+           asked_on    => '2012-04-04T15:23:05',
+           details     => 'I saw this chicken one day',
+           person_id   => 1,
+           question_id => 1,
+           title       => 'Why did the chicken cross the road?'
+         };

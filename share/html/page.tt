@@ -1,0 +1,14 @@
+[% DEFAULT title = "Missing Title" %]
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>[% title %]</title>
+    [% PROCESS stylesheets %]
+    [% PROCESS javascript %]
+   </head>
+  <body class="container">
+  [% PROCESS menu %]
+  [% content %]
+  [% PROCESS footer %]
+  </body>
+</html>

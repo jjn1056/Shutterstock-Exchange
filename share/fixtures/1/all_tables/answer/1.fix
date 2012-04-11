@@ -1,0 +1,6 @@
+$HASH1 = {
+           answer_id   => 1,
+           content     => 'To get to the other side!',
+           person_id   => 2,
+           question_id => 1
+         };

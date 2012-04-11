@@ -1,0 +1,10 @@
+<footer class="footer">
+  <p class="pull-right"><a href="http://www.perl.org/">
+    <img src="http://i.perl.org/powered/perlpowered.png"
+      border="0" width="134" height="48"></a></p>
+  <p>Presented by <a href="http://www.shutterstock.com">Shutterstock</a>, the
+    largest subscription-based stock photo agency in the world</p>
+  <p><a href="https://github.com/shutterstock">More opensource software</a>
+    by the <a href="http://www.shutterstock.com">Shutterstock</a> development
+    team</p>
+</footer>

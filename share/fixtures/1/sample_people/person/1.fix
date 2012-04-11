@@ -1,0 +1,6 @@
+$HASH1 = {
+           email     => 'johnn@shutterstock.com',
+           handle    => 'John',
+           password  => 'bKE9UspwyIPg8LsQHkJaiehiTeUdstI5JZOvaoQRgJA',
+           person_id => 1
+         };

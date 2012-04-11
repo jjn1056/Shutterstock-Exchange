@@ -1,0 +1,326 @@
+---
+schema:
+  procedures: {}
+  tables:
+    dbix_class_deploymenthandler_versions:
+      constraints:
+        - deferrable: 1
+          expression: ''
+          fields:
+            - id
+          match_type: ''
+          name: ''
+          on_delete: ''
+          on_update: ''
+          options: []
+          reference_fields: []
+          reference_table: ''
+          type: PRIMARY KEY
+        - deferrable: 1
+          expression: ''
+          fields:
+            - version
+          match_type: ''
+          name: dbix_class_deploymenthandler_versions_version
+          on_delete: ''
+          on_update: ''
+          options: []
+          reference_fields: []
+          reference_table: ''
+          type: UNIQUE
+      fields:
+        ddl:
+          data_type: text
+          default_value: ~
+          is_nullable: 1
+          is_primary_key: 0
+          is_unique: 0
+          name: ddl
+          order: 3
+          size:
+            - 0
+        id:
+          data_type: int
+          default_value: ~
+          is_auto_increment: 1
+          is_nullable: 0
+          is_primary_key: 1
+          is_unique: 0
+          name: id
+          order: 1
+          size:
+            - 0
+        upgrade_sql:
+          data_type: text
+          default_value: ~
+          is_nullable: 1
+          is_primary_key: 0
+          is_unique: 0
+          name: upgrade_sql
+          order: 4
+          size:
+            - 0
+        version:
+          data_type: varchar
+          default_value: ~
+          is_nullable: 0
+          is_primary_key: 0
+          is_unique: 1
+          name: version
+          order: 2
+          size:
+            - 50
+      indices: []
+      name: dbix_class_deploymenthandler_versions
+      options: []
+      order: 1
+  triggers: {}
+  views: {}
+translator:
+  add_drop_table: 0
+  filename: ~
+  no_comments: 0
+  parser_args:
+    package: &1 !!perl/hash:Shutterstock::Exchange::Schema
+      class_mappings:
+        DBIx::Class::DeploymentHandler::VersionStorage::Standard::VersionResult: __VERSION
+        Shutterstock::Exchange::Schema::Result::Answer: Answer
+        Shutterstock::Exchange::Schema::Result::Person: Person
+        Shutterstock::Exchange::Schema::Result::Question: Question
+      source_registrations:
+        Answer: !!perl/hash:DBIx::Class::ResultSource::Table
+          _columns:
+            answer_id:
+              data_type: integer
+              is_auto_increment: 1
+            content:
+              data_type: text
+            person_id:
+              data_type: integer
+              is_foreign_key: 1
+            question_id:
+              data_type: integer
+              is_foreign_key: 1
+          _columns_info_loaded: 0
+          _ordered_columns:
+            - answer_id
+            - content
+            - person_id
+            - question_id
+          _primaries: &2
+            - answer_id
+          _relationships:
+            person:
+              attrs:
+                accessor: single
+                fk_columns:
+                  person_id: 1
+                is_foreign_key_constraint: 1
+                undef_on_null_fk: 1
+              class: Shutterstock::Exchange::Schema::Result::Person
+              cond:
+                foreign.person_id: self.person_id
+              source: Shutterstock::Exchange::Schema::Result::Person
+            question:
+              attrs:
+                accessor: single
+                fk_columns:
+                  question_id: 1
+                is_foreign_key_constraint: 1
+                undef_on_null_fk: 1
+              class: Shutterstock::Exchange::Schema::Result::Question
+              cond:
+                foreign.question_id: self.question_id
+              source: Shutterstock::Exchange::Schema::Result::Question
+          _unique_constraints:
+            primary: *2
+          name: answer
+          result_class: Shutterstock::Exchange::Schema::Result::Answer
+          resultset_attributes: {}
+          resultset_class: Shutterstock::Exchange::Schema::DefaultRS
+          schema: *1
+          source_name: Answer
+        Person: !!perl/hash:DBIx::Class::ResultSource::Table
+          _columns:
+            email:
+              data_type: varchar
+              size: 96
+            handle:
+              data_type: varchar
+              size: 24
+            password:
+              data_type: char
+              encode_check_method: check_password
+              encode_class: Digest
+              encode_column: 1
+              size: 40
+            person_id:
+              data_type: integer
+              is_auto_increment: 1
+          _columns_info_loaded: 0
+          _ordered_columns:
+            - person_id
+            - handle
+            - email
+            - password
+          _primaries: &3
+            - person_id
+          _relationships:
+            answer_rs:
+              attrs:
+                accessor: single
+                cascade_delete: 1
+                cascade_update: 1
+                join_type: LEFT
+              class: Shutterstock::Exchange::Schema::Result::Answer
+              cond:
+                foreign.person_id: self.person_id
+              source: Shutterstock::Exchange::Schema::Result::Answer
+            question_rs:
+              attrs:
+                accessor: single
+                cascade_delete: 1
+                cascade_update: 1
+                join_type: LEFT
+              class: Shutterstock::Exchange::Schema::Result::Question
+              cond:
+                foreign.person_id: self.person_id
+              source: Shutterstock::Exchange::Schema::Result::Question
+          _unique_constraints:
+            person_email:
+              - email
+            person_handle:
+              - handle
+            primary: *3
+          name: person
+          result_class: Shutterstock::Exchange::Schema::Result::Person
+          resultset_attributes: {}
+          resultset_class: Shutterstock::Exchange::Schema::ResultSet::Person
+          schema: *1
+          source_name: Person
+        Question: !!perl/hash:DBIx::Class::ResultSource::Table
+          _columns:
+            asked_on:
+              _ic_dt_method: datetime
+              _inflate_info:
+                deflate: !!perl/code '{ "DUMMY" }'
+                inflate: !!perl/code '{ "DUMMY" }'
+              data_type: datetime
+            details:
+              data_type: text
+            person_id:
+              data_type: integer
+              is_foreign_key: 1
+            question_id:
+              data_type: integer
+              is_auto_increment: 1
+            title:
+              data_type: varchar
+              size: 64
+          _columns_info_loaded: 0
+          _ordered_columns:
+            - question_id
+            - title
+            - details
+            - asked_on
+            - person_id
+          _primaries: &4
+            - question_id
+          _relationships:
+            answered_by:
+              attrs:
+                accessor: single
+                cascade_delete: 1
+                cascade_update: 1
+                join_type: LEFT
+              class: Shutterstock::Exchange::Schema::Result::Answer
+              cond:
+                foreign.question_id: self.question_id
+              source: Shutterstock::Exchange::Schema::Result::Answer
+            person_asked_by:
+              attrs:
+                accessor: single
+                fk_columns:
+                  person_id: 1
+                is_foreign_key_constraint: 1
+                undef_on_null_fk: 1
+              class: Shutterstock::Exchange::Schema::Result::Person
+              cond:
+                foreign.person_id: self.person_id
+              source: Shutterstock::Exchange::Schema::Result::Person
+          _unique_constraints:
+            primary: *4
+          name: question
+          result_class: Shutterstock::Exchange::Schema::Result::Question
+          resultset_attributes: {}
+          resultset_class: Shutterstock::Exchange::Schema::DefaultRS
+          schema: *1
+          source_name: Question
+        __VERSION: !!perl/hash:DBIx::Class::ResultSource::Table
+          _columns:
+            ddl:
+              data_type: text
+              is_nullable: 1
+            id:
+              data_type: int
+              is_auto_increment: 1
+            upgrade_sql:
+              data_type: text
+              is_nullable: 1
+            version:
+              data_type: varchar
+              size: 50
+          _columns_info_loaded: 0
+          _ordered_columns:
+            - id
+            - version
+            - ddl
+            - upgrade_sql
+          _primaries: &5
+            - id
+          _relationships: {}
+          _unique_constraints:
+            dbix_class_deploymenthandler_versions_version:
+              - version
+            primary: *5
+          name: dbix_class_deploymenthandler_versions
+          result_class: DBIx::Class::DeploymentHandler::VersionStorage::Standard::VersionResult
+          resultset_attributes: {}
+          resultset_class: DBIx::Class::DeploymentHandler::VersionStorage::Standard::VersionResultSet
+          schema: *1
+          source_name: __VERSION
+      storage: !!perl/hash:DBIx::Class::Storage::DBI::SQLite
+        _conn_pid: 5957
+        _connect_info:
+          - DBI:SQLite:/Users/johnn/Desktop/Shutterstock-Exchange/share/shutterstock-exchange-schema.db
+          - ''
+          - ''
+        _dbh: !!perl/hash:DBI::db {}
+        _dbh_autocommit: 1
+        _dbh_details: {}
+        _dbh_gen: 0
+        _dbi_connect_info:
+          - DBI:SQLite:/Users/johnn/Desktop/Shutterstock-Exchange/share/shutterstock-exchange-schema.db
+          - ''
+          - ''
+          - &6
+            AutoCommit: 1
+            PrintError: 0
+            RaiseError: 1
+            ShowErrorStatement: 1
+        _dbic_connect_attributes: *6
+        _driver_determined: 1
+        _in_do_block: 0
+        _sql_maker: ~
+        _sql_maker_opts: {}
+        savepoints: []
+        schema: *1
+        transaction_depth: 0
+    sources:
+      - __VERSION
+  parser_type: SQL::Translator::Parser::DBIx::Class
+  producer_args: {}
+  producer_type: SQL::Translator::Producer::YAML
+  show_warnings: 0
+  trace: 0
+  version: 0.11010

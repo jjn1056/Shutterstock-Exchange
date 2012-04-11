@@ -1,0 +1,44 @@
+[% DEFAULT title = "Shutterstock Exchange" %]
+
+<div class="alert alert-info">
+  <a class="close" data-dismiss="alert">×</a>
+  <Strong>Welcome to Shutterstock Exchange!</Strong>
+  This is a website where Shutterstock employees are encouraged to ask
+  questions, discuss and provide answers, all while earning reputation points
+  that can be cashed in for valuable prizes. In addition there will be weekly,
+  monthy and quarterly contests with special prizes for active community
+  members.  So get started!
+</div>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#recent" data-toggle="tab">Recent</a></li>
+  <li><a href="#unanswered" data-toggle="tab">Unanswered</a></li>
+</ul>
+<div class="tab-content">
+  <div class="tab-pane active" id="recent">
+    <div class="alert alert-info">
+      <a class="close" data-dismiss="alert">×</a>
+      <Strong>Recently Asked.</Strong>  These are the most recently asked
+      questions by contributing Shutterstock employees.
+    </div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Total Answers</th><th>Question</th><th>Asked By</th><th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+          [% FOREACH q IN questions %]<tr>
+              <td>[% q.total_answers %]</td>
+          <td>[% q.title %]</td> <td>[% q.asked_by %]</td> <td>[% q.asked_on %]</td>
+      </tr>[% END %]
+      </tbody>
+    </table>
+  </div>
+  <div class="tab-pane" id="unanswered">Longest Unanswered</div>
+</div>
+
+
+
+
+
