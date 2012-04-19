@@ -12,9 +12,8 @@ sub start : Chained('/start') PathPrefix CaptureArgs(0) { }
     PathPart('') Args(0)
   {
     my ($self, $ctx) = @_;
-    $ctx->stash(current_model => 'Login');
     if(my $params = $ctx->req->body_parameters) {
-       $ctx->model
+       $ctx->model('Login')
          ->process(params => $params)
           and $ctx->go('welcome');
     }
