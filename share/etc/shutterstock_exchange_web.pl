@@ -14,14 +14,28 @@
     'Debug',
     'Debug::DBIC::QueryLog', {querylog_args => {passthrough=>1}},
   ],
+  'Plugin::Authentication' => {
+    default_realm => 'ss_exchange_internal_account',
+    realms => {
+      ss_exchange_internal_account => {
+        credential => {
+          class => 'Password',
+          password_type => 'self_check',
+          password_field => 'password'
+        },
+        store => {
+          class => 'DBIx::Class',
+          user_model => 'Schema::Person',
+        },
+      },
+    },
+  },
   'Controller::Root' => {
     namespace => '',
   },
   'Model::Schema' => {
     traits => ['FromMigration','QueryLog::AdoptPlack'],
     schema_class => 'Shutterstock::Exchange::Schema',
-    install_if_needed => {
-      default_fixture_sets => ['all_tables']},
   },
   'View::HTML' => {
     INCLUDE_PATH => [ '__path_to(share,html)__',

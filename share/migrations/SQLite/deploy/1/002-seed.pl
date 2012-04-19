@@ -5,8 +5,6 @@ use DBIx::Class::Migration::RunScript;
 
 migrate {
 
-  return unless $ENV{SEED_SHUTTERSTOCK_EXCHANGE};
-
   my $encoder = sub {
     my $digester = Digest->new('SHA-256');
     my ($plain_text) = @_;

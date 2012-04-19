@@ -10,6 +10,7 @@ use Catalyst qw/
   Session
   Session::Store::TestMemcached
   Session::State::Cookie
+  Authentication
 /;
 
 extends 'Catalyst';

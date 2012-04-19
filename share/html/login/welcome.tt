@@ -1,0 +1,6 @@
+[% DEFAULT title = "Welcome" %]
+You are now logged in.  Welcome to the maddness
+
+
+
+

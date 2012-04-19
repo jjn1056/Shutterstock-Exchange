@@ -13,8 +13,12 @@ sub uri_for_action {
   $ctx->uri_for_action(@args);
 }
 
+sub model {
+  my ($self, $ctx, @args) = @_;
+  $ctx->model(@args);
+}
+
 __PACKAGE__->config(
-  expose_methods => [qw/uri_for_action uri_for/],
+  expose_methods => [qw/
+    uri_for_action model uri_for/],
 );
-
-

@@ -1,6 +1,7 @@
 package Shutterstock::Exchange::Schema::Result::Person;
 
 use syntax 'simple/v2';
+use DateTime;
 use Shutterstock::Exchange::Schema::Candy
   -components => ['EncodedColumn'];
 
@@ -33,7 +34,7 @@ might_have question_rs => (
 
 method asks($question, $details) {
   $self->create_related( question_rs =>
-    {title => $question, details => $details});
+    {title => $question, details => $details, asked_on => DateTime->now});
 }
 
 method answers($question, $answer) {
