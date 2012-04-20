@@ -11,14 +11,17 @@ sub start : Chained('/start') PathPrefix CaptureArgs(0) {
 
   sub login :
     Chained('start')
-    PathPart('') Args(0)
-  {
-    my ($self, $ctx) = @_;
-    if(my $params = $ctx->req->body_parameters) {
-       $ctx->model->process(params => $params)
+    ActionClass('REST')
+    PathPart('') Args(0) { }
+
+    sub login_GET { }
+
+    sub login_POST {
+      my ($self, $ctx) = @_;
+      $ctx->model->process(params
+        => $ctx->req->body_parameters)
           and $ctx->go('welcome');
     }
-  }
 
   sub welcome : Action { }
 
