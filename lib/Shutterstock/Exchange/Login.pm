@@ -9,6 +9,11 @@ has_field 'handle' => (type => 'Text', size => 45, required => 1);
 has_field 'password' => (type => 'Password', size => 12, required => 1);
 has_field 'submit' => (type => 'Submit', value => 'Go');
 
+sub authenticate_if_valid {
+  my ($self, $params) = @_;
+  $self->process(params => $params);
+}
+
 sub validate {
   my $self = shift;
   $self->validate_authentication or

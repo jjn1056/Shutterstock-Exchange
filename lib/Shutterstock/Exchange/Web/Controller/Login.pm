@@ -18,8 +18,8 @@ sub start : Chained('/start') PathPrefix CaptureArgs(0) {
 
     sub login_POST {
       my ($self, $ctx) = @_;
-      $ctx->model->process(params
-        => $ctx->req->body_parameters)
+      $ctx->model->authenticate_if_valid(
+        $ctx->req->body_parameters)
           and $ctx->go('welcome');
     }
 
