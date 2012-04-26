@@ -13,6 +13,13 @@ __PACKAGE__->load_components(qw/
 
 sub default_result_namespace { 'Shutterstock::Exchange::Schema::Result' }
 
+sub fill_fields_from_hashref {
+  my ($self, $values) = @_;
+  foreach my $field (keys %$values) {
+    $self->$field($values->{$field});
+  }
+}
+
 1;
 
 =head1 NAME

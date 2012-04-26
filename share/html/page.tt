@@ -1,4 +1,4 @@
-[% DEFAULT title = "Missing Title" %]
+[% META title = "Missing Title" %]
 <!DOCTYPE html>
 <html lang="en">
   <head>

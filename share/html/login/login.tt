@@ -1,4 +1,4 @@
-[% DEFAULT title = "Login" %]
+[% META title = "Login" %]
 [% model.render %]
 
 
