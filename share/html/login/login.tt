@@ -1,6 +1,2 @@
 [% META title = "Login" %]
 [% model.render %]
-
-
-
-

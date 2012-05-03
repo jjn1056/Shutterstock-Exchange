@@ -7,8 +7,8 @@
     [% PROCESS javascript %]
    </head>
   <body class="container">
-  [% PROCESS menu %]
-  [% content %]
-  [% PROCESS footer %]
+    [% PROCESS menu %]
+    [% content %]
+    [% PROCESS footer %]
   </body>
 </html>
