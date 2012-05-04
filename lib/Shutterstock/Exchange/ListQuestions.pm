@@ -10,14 +10,14 @@ sub render {
   my $rs = $self->question_rs
     ->search({},{prefetch=>'person_asked_by'});
 
-  $zoom->select('#questions')->repeat(sub {
+  $zoom->repeat('#questions' => sub {
     HTML::Zoom::CodeStream->new({
       code => sub {
         while (my $row = $rs->next) {
           return sub {
-            $_->select('.title')->replace_content($row->title)
-              ->select('.asked_by')->replace_content($row->person_asked_by->handle)
-              ->select('.asked_on')->replace_content($row->asked_on->dmy .' '. $row->asked_on->hms)
+            $_->replace_content('.title' => $row->title)
+              ->replace_content('.asked_by' => $row->person_asked_by->handle)
+              ->replace_content('.asked_on' => $row->asked_on->dmy .' '. $row->asked_on->hms)
           }
         }
         return
@@ -28,11 +28,3 @@ sub render {
 }
 
 __PACKAGE__->meta->make_immutable;
-
-__END__
-
-
-
-use Devel::Dwarn;
-Dwarn $zoom->to_html;
-
