@@ -1,6 +1,7 @@
 package Shutterstock::Exchange::Web::View::HTML;
 
 use Modern::Perl;
+use HTML::Zoom;
 use parent 'Catalyst::View::TT';
 
 sub uri_for {
@@ -18,7 +19,16 @@ sub model {
   $ctx->model(@args);
 }
 
+sub zoom {
+  my ($context, $model) = @_;
+  return sub {
+    my $zoom = HTML::Zoom->from_html(shift);
+    $model->render($zoom);
+  };
+}
+
 __PACKAGE__->config(
   expose_methods => [qw/
     uri_for_action model uri_for/],
+  FILTERS => { zoom => [\&zoom, 1] },
 );

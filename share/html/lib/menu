@@ -1,15 +1,15 @@
 <div class="navbar">
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="#">Shutterstock Exchange [% aaa %]</a>
+      <a class="brand" href="#">Shutterstock Exchange</a>
       <div class="nav-collapse">
         <ul class="nav">
-          <li><a class="navbar-text" href="#">Home</a></li>
-          <li><a class="navbar-text" href="#">Ask a Question!</a></li>
-          <li><a class="navbar-text" href="#">Log In!</a></li>
+          <li><a class="navbar-text" href="[% uri_for_action('/index') %]">Home</a></li>
+          <li><a class="navbar-text" href="[% uri_for_action('/ask/ask') %]">Ask a Question!</a></li>
+          <li><a class="navbar-text" href="[% uri_for_action('/login/login') %]">Log In!</a></li>
         </ul>
         <form action="/search" class="navbar-form pull-right">
-            <input name="q" type="search" placeholder="search question" results="0" incremental="true" autofocus />
+            <input name="q" type="search" placeholder="search question" autofocus />
         </form>
       </div>
     </div>

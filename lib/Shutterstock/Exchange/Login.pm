@@ -30,11 +30,11 @@ sub add_password_error {
 sub validate {
   my $self = shift;
   $self->has_any_field_errors or
-    $self->validate_authentication or
+    $self->can_authenticate_user or
       $self->add_password_error;
 }
 
-sub validate_authentication {
+sub can_authenticate_user {
   my $self = shift;
   $self->ctx->authenticate($self->values);
 }

@@ -5,6 +5,8 @@ use HTML::FormHandler::Moose;
 
 extends 'HTML::FormHandler';
 
+with 'HTML::FormHandler::Widget::Theme::Bootstrap';
+
 has_field 'title' => (type => 'Text', size => 45, required => 1);
 has_field 'details' => (type => 'TextArea', required => 1);
 has_field 'submit' => (type => 'Submit', value => 'Go');

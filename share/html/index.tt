@@ -27,12 +27,14 @@
           <th>Total Answers</th><th>Question</th><th>Asked By</th><th>Date</th>
         </tr>
       </thead>
-      <tbody>
-          [% FOREACH q IN questions %]<tr>
-              <td>[% q.total_answers %]</td>
-          <td>[% q.title %]</td> <td>[% q.asked_by %]</td> <td>[% q.asked_on %]</td>
-      </tr>[% END %]
-      </tbody>
+      [% FILTER zoom model %]<tbody id="questions">
+        <tr>
+          <td class="total_answers">0</td>
+          <td class="title">0</td>
+          <td class="asked_by">0</td>
+          <td class="asked_on">0</td>
+       </tr>
+      </tbody>[% END %]
     </table>
   </div>
   <div class="tab-pane" id="unanswered">Longest Unanswered</div>
