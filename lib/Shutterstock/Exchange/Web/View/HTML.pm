@@ -22,20 +22,29 @@ sub model {
 }
 
 sub _zoom_init {
-  HTML::Zoom->from_html(shift);
+  sub { HTML::Zoom->from_html(shift) };
 }
 
-sub _zoom_resultset {
-  my ($field, $rs) = @_;
+sub _fill_result {
+  my ($result) = @_;
   return sub {
-    shift->repeat('#'.$field, sub {
+    my $zoom = shift;
+    foreach my $field (@{$result->about->{fields}}) {
+      $zoom = $zoom->replace_content(".$field" => $result->$field);
+    }
+    return $zoom;
+  }
+}
+
+sub _fill_resultset {
+  my ($rs) = @_;
+  return sub {
+    shift->repeat('#'.$rs->about->{id}, sub {
       HTML::Zoom::CodeStream->new({
         code => sub {
           while (my $row = $rs->next) {
             return sub {
-              $_->replace_content('.title' => $row->title)
-                ->replace_content('.asked_by' => $row->person_asked_by->handle)
-                  ->replace_content('.asked_on' => $row->asked_on->dmy .' '. $row->asked_on->hms)
+              _fill_result($row)->($_);
             };
           }
           return;
@@ -45,29 +54,33 @@ sub _zoom_resultset {
   };
 }
 
+sub _run_steps {
+  my @steps = @_;
+  return sub {
+    my $stash = shift;
+    foreach my $step (@steps) {
+      $stash = $step->($stash);
+    }
+    $stash->to_html;
+  };
+}
+
+sub _process_model {
+  my ($model, @steps) = @_;
+  if($model->about->{type} eq 'ResultSet') {
+    push @steps,
+      _fill_resultset($model);
+  } elsif($model->about->{type} eq 'Result') {
+    push @steps, _fill_resultset($model);
+  }
+
+  return _run_steps(@steps);
+}
+
 sub zoom {
   my ($context, $model) = @_;
-  if ($model->can('about')) {
-    my @steps = ( \&_zoom_init );
-    my %about = $model->about;
-    foreach my $field (@{$about{fields}}) {
-      my $about_field_method = "about_$field";
-      my %about_field = $model->$about_field_method;
-      if($about_field{type} eq 'ResultSet') {
-        my $rs = $model->questions;
-        push @steps, _zoom_resultset($field, $rs);
-      }
-    }
-    return sub {
-      my $stash = shift;
-      foreach my $step (@steps) {
-        $stash = $step->($stash);
-      }
-      $stash->to_html;
-    };
-  } else {
-    return sub { shift };
-  }
+  return $model->can('about') ?
+    _process_model($model, _zoom_init) : sub { shift };
 }
 
 __PACKAGE__->config(
