@@ -13,8 +13,20 @@ action start :
   action all :
     Chained('start') Args(0)
   {
-    $ctx->stash(rest =>
-      $ctx->model('Schema::Question')->as_arrayref);
+    my @q = $ctx->model('Schema::Question')
+      ->search({},{prefetch=>'person_asked_by'})
+        ->map( sub {
+          +{
+              title => $_->title,
+              link => $_->id,
+              asked_on => $_->asked_on->dmy .' '. $_->asked_on->hms,
+              asked_by => +{
+                handle => $_->person_asked_by->handle,
+                link => $_->person_asked_by->id },
+           }
+       });
+
+    $ctx->stash(rest => \@q);
   }
 
   action recent :
@@ -30,3 +42,4 @@ action start :
   }
 
 __PACKAGE__->meta->make_immutable;
+

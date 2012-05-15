@@ -8,7 +8,7 @@
    </head>
   <body class="container">
     [% PROCESS menu %]
-    [% content %]
+    [% content FILTER zoom model %]
     [% PROCESS footer %]
   </body>
 </html>

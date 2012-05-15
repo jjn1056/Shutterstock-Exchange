@@ -4,7 +4,8 @@ use parent 'Catalyst::Model::Factory::PerRequest';
 
 sub prepare_arguments {
   my ($self, $ctx) = @_;
-  return +{ question_rs => $ctx->model('Schema::Question') };
+  return +{ questions => $ctx->model('Schema::Question')
+    ->search({},{prefetch=>'person_asked_by'}) };
 }
 
 __PACKAGE__->config({

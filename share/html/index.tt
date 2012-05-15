@@ -27,14 +27,14 @@
           <th>Total Answers</th><th>Question</th><th>Asked By</th><th>Date</th>
         </tr>
       </thead>
-      [% FILTER zoom model %]<tbody id="questions">
+      <tbody id="questions">
         <tr>
           <td class="total_answers">0</td>
           <td class="title">0</td>
           <td class="asked_by">0</td>
           <td class="asked_on">0</td>
        </tr>
-      </tbody>[% END %]
+      </tbody>
     </table>
   </div>
   <div class="tab-pane" id="unanswered">Longest Unanswered</div>

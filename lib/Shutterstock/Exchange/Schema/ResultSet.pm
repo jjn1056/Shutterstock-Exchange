@@ -22,6 +22,17 @@ sub hri {
 sub as_array { shift->hri->all }
 sub as_arrayref { +[shift->as_array] }
 
+sub map {
+  my ($self, $cr) = @_;
+  my @results;
+  while(my $row = $self->next) {
+    local $_ = $row;
+    push @results,
+      $cr->($row, $self);
+  }
+  return @results;
+}
+
 1;
 
 =head1 NAME
