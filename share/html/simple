@@ -1,0 +1,6 @@
+[% BLOCK good %]
+sdfsdfsfsdf
+[% END %]
+
+[% PROCESS $template %]
+[% PROCESS good %]

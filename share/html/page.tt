@@ -1,14 +1,17 @@
-[% META title = "Missing Title" %]
+[% DEFAULT
+  title = "Missing Title"
+  layout="simple" %]
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>[% title %]</title>
+    [% PROCESS title %]
     [% PROCESS stylesheets %]
     [% PROCESS javascript %]
-   </head>
+  </head>
   <body class="container">
     [% PROCESS menu %]
-    [% content FILTER zoom model %]
+    [% PROCESS $layout  %]
     [% PROCESS footer %]
   </body>
 </html>

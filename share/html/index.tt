@@ -1,4 +1,9 @@
-[% DEFAULT title = "Shutterstock Exchange" %]
+[% SET title = "Shutterstock Exchange" %]
+
+[% BLOCK good;
+  PROCESS "$component.caller/good" %]
+WOOOT
+[% END %]
 
 <div class="alert alert-info">
   <a class="close" data-dismiss="alert">×</a>
@@ -28,12 +33,14 @@
         </tr>
       </thead>
       <tbody id="questions">
+        [% WHILE(q = model.next) %]
         <tr>
-          <td class="total_answers">0</td>
-          <td class="title">0</td>
-          <td class="person_asked_by_handle">0</td>
-          <td><span class="asked_on_dmy">0</span> <span class="asked_on_hms">0</span></td>
-       </tr>
+          <td>0</td>
+          <td>[% q.title %]</td>
+          <td>[% q.person_asked_by.handle %]</td>
+          <td>[% q.asked_on.dmy %] [% q.asked_on.hms %]</td>
+        </tr>
+        [% END %]
       </tbody>
     </table>
   </div>
@@ -43,4 +50,4 @@
 
 
 
-
+<D-r>

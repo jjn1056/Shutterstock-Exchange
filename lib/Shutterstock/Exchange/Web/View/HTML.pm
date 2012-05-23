@@ -68,8 +68,7 @@ sub _run_steps {
 sub _process_model {
   my ($model, @steps) = @_;
   if($model->about->{type} eq 'ResultSet') {
-    push @steps,
-      _fill_resultset($model);
+    push @steps, _fill_resultset($model);
   } elsif($model->about->{type} eq 'Result') {
     push @steps, _fill_resultset($model);
   }
@@ -87,4 +86,5 @@ __PACKAGE__->config(
   expose_methods => [qw/
     uri_for_action model uri_for/],
   FILTERS => { zoom => [\&zoom, 1] },
+  EXPOSE_BLOCKS => 1,
 );
