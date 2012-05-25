@@ -1,17 +1,20 @@
 [% DEFAULT
-  title = "Missing Title"
-  layout="simple" %]
+  title = template.title or "Missing Title"
+  layout = template.layout or "simple" %]
+
+[% USE Dumper %]
+[% USE IncludeUtils %]
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    [% PROCESS title %]
-    [% PROCESS stylesheets %]
+    <title>[% title %]</title>
+    [% PROCESS stylesheet %]
     [% PROCESS javascript %]
   </head>
   <body class="container">
     [% PROCESS menu %]
-    [% PROCESS $layout  %]
+    [% PROCESS $layout %]
     [% PROCESS footer %]
   </body>
 </html>

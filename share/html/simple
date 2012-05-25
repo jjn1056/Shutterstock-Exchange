@@ -1,5 +1,5 @@
 [% BLOCK good %]
-sdfsdfsfsdf
+An Example inherited block</br>
 [% END %]
 
 [% PROCESS $template %]

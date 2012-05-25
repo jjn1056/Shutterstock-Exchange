@@ -41,8 +41,7 @@
     INCLUDE_PATH => [ '__path_to(share,html)__',
       '__path_to(share,html,lib)__' ],
     TEMPLATE_EXTENSION => '.tt',
-    PRE_PROCESS => 'pre_process',
-    WRAPPER => 'page.tt',
+    PROCESS => 'page.tt',
   },
 
 };

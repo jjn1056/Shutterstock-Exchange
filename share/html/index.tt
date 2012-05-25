@@ -1,9 +1,4 @@
-[% SET title = "Shutterstock Exchange" %]
-
-[% BLOCK good;
-  PROCESS "$component.caller/good" %]
-WOOOT
-[% END %]
+[% META title = "Shutterstock Exchange" %]
 
 <div class="alert alert-info">
   <a class="close" data-dismiss="alert">×</a>
@@ -33,14 +28,14 @@ WOOOT
         </tr>
       </thead>
       <tbody id="questions">
-        [% WHILE(q = model.next) %]
-        <tr>
+        [% BLOCK q_tr %] <tr>
           <td>0</td>
-          <td>[% q.title %]</td>
-          <td>[% q.person_asked_by.handle %]</td>
-          <td>[% q.asked_on.dmy %] [% q.asked_on.hms %]</td>
-        </tr>
-        [% END %]
+          <td>[% title %]</td>
+          <td>[% person_asked_by.handle %]</td>
+          <td>[% asked_on.dmy %]
+            [% asked_on.hms %]</td>
+        </tr> [% END %]
+        [% IncludeUtils.fill("q_tr", questions) %]
       </tbody>
     </table>
   </div>
@@ -48,6 +43,7 @@ WOOOT
 </div>
 
 
-
-
-<D-r>
+[% BLOCK good;
+  PROCESS "$component.caller/$component.name" %]
+Added to block
+[% END %]
